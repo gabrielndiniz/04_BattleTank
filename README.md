@@ -9,3 +9,6 @@ You're welcome to download and do anything legal with these files.
 Hope you like it!
 
 Gabriel Diniz
+
+##Lecture List
+* 155. Seting up a GitHub "Repo"
