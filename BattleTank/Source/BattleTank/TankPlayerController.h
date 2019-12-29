@@ -9,9 +9,6 @@
 
 
 
-/**
- * 
- */
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
@@ -21,4 +18,11 @@ public:
 	ATank* GetControlledTank() const;
 
 	void BeginPlay() override;
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+
+private:
+	void AimTowardsCrosshair(); //start the tank moving the barrel so that a shot would it where intersects the world
 };
