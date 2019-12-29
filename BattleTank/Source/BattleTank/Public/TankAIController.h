@@ -2,6 +2,7 @@
 
 #pragma once
 
+
 #include "Public\Tank.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
@@ -21,5 +22,7 @@ protected:
 
 public:
 	ATank* GetControlledAITank() const;
+
+	ATank* GetPlayerTank();
 
 };
