@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Blueprint/UserWidget.h"
+#include "DrawDebugHelpers.h"
 #include "Engine/World.h"
 #include "Public/Tank.h"
 #include "CoreMinimal.h"
@@ -31,6 +32,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	float CrossHairYLocation = 0.3f;
 	
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000.f;
 
 private:
 	//start the tank moving the barrel so that a shot would it where intersects the world
@@ -40,4 +43,6 @@ private:
 	bool GetSightRayHitLocation(FVector&) const;
 
 	bool GetLookDirection(FVector2D ScreenLocation, FVector&LookDirection) const;
+
+	bool GetlookVectorHitLocation(FVector&LookDirection, FVector& HitLocation) const;
 };

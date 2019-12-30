@@ -57,13 +57,14 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection)) {
-		UE_LOG(LogTemp, Warning, TEXT("LookDirection: %s"), *LookDirection.ToString());
-
+		// Line-trace along that look direction, and see what we hit (up to max range)
+		FVector HitLocation;
+		GetlookVectorHitLocation(LookDirection, HitLocation);
+		UE_LOG(LogTemp, Warning, TEXT("HitResult: %s"), *HitLocation.ToString());
 
 	}
 
 
-	// Line-trace along that look direction, and see what we hit (up to max range)
 	return true;
 }
 
@@ -76,6 +77,56 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &
 		CameraWorldLocation,
 		LookDirection
 	);
+	
+}
+
+bool ATankPlayerController::GetlookVectorHitLocation(FVector & LookDirection, FVector& HitLocation) const
+{
+	//FVector Start = GetWorld()->GetFirstPlayerController()->GetPawn()->GetAttachParentSocketName()->
+
+	/*FVector PlayerViewPointLocation;
+	FRotator PlayerViewPointRotation;
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
+		PlayerViewPointLocation,
+		PlayerViewPointRotation
+	);
+	FVector LineTraceEnd = PlayerViewPointLocation +
+		LineTraceRange * LookDirection;
+	DrawDebugLine(
+		GetWorld(),
+		PlayerViewPointLocation,
+		LineTraceEnd,
+		FColor(255, 0, 0),
+		false,
+		0.f,
+		0.f,
+		10.f
+	);*/
+
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+
+	auto EndLocation = StartLocation + LookDirection * LineTraceRange;
+
+	FCollisionQueryParams CollisionQueryParams;
+	FCollisionResponseParams CollisionResponseParams;
+	FHitResult HitResult;
+	if (GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		StartLocation, //It maybe work with PlayerViewPointLocation
+		EndLocation, //it maybe work with LineTraceEnd
+		ECollisionChannel::ECC_Visibility,
+		CollisionQueryParams,
+		CollisionResponseParams
+	)) {
+		HitLocation=HitResult.Location;
+		return true;
+	}
+	else { 
+		HitLocation.X = 0;
+		HitLocation.Y = 0;
+		HitLocation.Z = 0;
+		return false; }
+	;
 	
 }
 
