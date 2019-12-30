@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "TankPlayerController.h"
 #include "BattleTank.h"
 #include "Public/Tank.h"
-#include "TankPlayerController.h"
+
 
 
 void ATankPlayerController::BeginPlay()
@@ -54,8 +54,29 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 	auto ScreenLocation = FVector2D(ViewportSizeX*CrossHairXLocation, ViewportSizeY*CrossHairYLocation);
 	
 	//"De-project" the screen position of the crosshair to a world direction
+
+	FVector LookDirection;
+	if (GetLookDirection(ScreenLocation, LookDirection)) {
+		UE_LOG(LogTemp, Warning, TEXT("LookDirection: %s"), *LookDirection.ToString());
+
+
+	}
+
+
 	// Line-trace along that look direction, and see what we hit (up to max range)
-	return false;
+	return true;
+}
+
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const
+{
+	FVector  CameraWorldLocation; //to be discarded
+	return DeprojectScreenPositionToWorld( //this function changed, from version
+		ScreenLocation.X,
+		ScreenLocation.Y,
+		CameraWorldLocation,
+		LookDirection
+	);
+	
 }
 
 ATank* ATankPlayerController::GetControlledTank() const {

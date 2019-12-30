@@ -7,6 +7,7 @@
 #include "Public/Tank.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Kismet/GameplayStatics.h"
 #include "TankPlayerController.generated.h" //must be the last include
 
 
@@ -37,4 +38,6 @@ private:
 	
 	//Return an OUT parameter, true if hit landscape
 	bool GetSightRayHitLocation(FVector&) const;
+
+	bool GetLookDirection(FVector2D ScreenLocation, FVector&LookDirection) const;
 };
