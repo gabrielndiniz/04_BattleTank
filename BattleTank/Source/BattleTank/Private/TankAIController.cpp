@@ -2,6 +2,7 @@
 
 
 #include "Public/TankAIController.h"
+#include "Public/Tank.h"
 
 void ATankAIController::BeginPlay()
 {
@@ -39,4 +40,22 @@ ATank* ATankAIController::GetPlayerTank()
 		return Cast<ATank>(PlayerPawn);
 	}
 	
+}
+
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if(GetPlayerTank()) {
+		FVector HitLocation;
+
+		//TODO move towards the player
+
+		// Aim towards the Player
+
+		HitLocation = GetPlayerTank()->GetActorLocation();
+		GetControlledAITank()->AimAt(HitLocation);
+
+		// Fire if ready
+
+	}
 }

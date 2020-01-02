@@ -34,7 +34,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	if (GetSightRayHitLocation(HitLocation)) { // Has "side-effect", is going to line trace
 		//UE_LOG(LogTemp, Warning, TEXT("Look Direction: %s"), *HitLocation.ToString());
-		//TODO aim at that point
+		GetControlledTank()->AimAt(HitLocation);
 	}
 	else {
 		//UE_LOG(LogTemp, Warning, TEXT("Aim the Sky"));
@@ -59,12 +59,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 	if (GetLookDirection(ScreenLocation, LookDirection)) {
 		// Line-trace along that look direction, and see what we hit (up to max range)
 		FVector HitLocation;
-		GetlookVectorHitLocation(LookDirection, HitLocation);
-		UE_LOG(LogTemp, Warning, TEXT("HitResult: %s"), *HitLocation.ToString());
-
+		GetLookVectorHitLocation(LookDirection, HitLocation);
+		//UE_LOG(LogTemp, Warning, TEXT("HitResult: %s"), *HitLocation.ToString());
+		OutHitLocation = HitLocation;
 	}
 
-
+	
 	return true;
 }
 
@@ -80,11 +80,11 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &
 	
 }
 
-bool ATankPlayerController::GetlookVectorHitLocation(FVector & LookDirection, FVector& HitLocation) const
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const
 {
 	//FVector Start = GetWorld()->GetFirstPlayerController()->GetPawn()->GetAttachParentSocketName()->
-
-	/*FVector PlayerViewPointLocation;
+	
+	FVector PlayerViewPointLocation;
 	FRotator PlayerViewPointRotation;
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
 		PlayerViewPointLocation,
@@ -92,7 +92,8 @@ bool ATankPlayerController::GetlookVectorHitLocation(FVector & LookDirection, FV
 	);
 	FVector LineTraceEnd = PlayerViewPointLocation +
 		LineTraceRange * LookDirection;
-	DrawDebugLine(
+
+	/*DrawDebugLine(
 		GetWorld(),
 		PlayerViewPointLocation,
 		LineTraceEnd,
@@ -103,20 +104,20 @@ bool ATankPlayerController::GetlookVectorHitLocation(FVector & LookDirection, FV
 		10.f
 	);*/
 
-	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+	
 
-	auto EndLocation = StartLocation + LookDirection * LineTraceRange;
+	//FVector StartLocation = PlayerCameraManager->GetCameraLocation();
 
-	FCollisionQueryParams CollisionQueryParams;
-	FCollisionResponseParams CollisionResponseParams;
+	//FVector EndLocation = StartLocation + (LookDirection * LineTraceRange);
+
+	//UE_LOG(LogTemp, Warning, TEXT("PlayerViewPointLocation:%s aim LineTraceEnd: %s"), *PlayerViewPointLocation.ToString(), *LineTraceEnd.ToString());
+
 	FHitResult HitResult;
 	if (GetWorld()->LineTraceSingleByChannel(
 		HitResult,
-		StartLocation, //It maybe work with PlayerViewPointLocation
-		EndLocation, //it maybe work with LineTraceEnd
-		ECollisionChannel::ECC_Visibility,
-		CollisionQueryParams,
-		CollisionResponseParams
+		PlayerViewPointLocation, //Can be PlayerViewPointLocation
+		LineTraceEnd, //Can be LineTraceEnd
+		ECollisionChannel::ECC_Visibility
 	)) {
 		HitLocation=HitResult.Location;
 		return true;
@@ -127,6 +128,17 @@ bool ATankPlayerController::GetlookVectorHitLocation(FVector & LookDirection, FV
 		HitLocation.Z = 0;
 		return false; }
 	;
+
+	//DrawDebugLine(
+	//	GetWorld(),
+	//	StartLocation,
+	//	EndLocation,
+	//	FColor(255, 0, 0),
+	//	false,
+	//	0.f,
+	//	0.f,
+	//	10.f
+	//);
 	
 }
 
