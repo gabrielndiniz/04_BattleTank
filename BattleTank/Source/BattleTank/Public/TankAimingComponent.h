@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Kismet/GameplayStatics.h"
 #include "GameFramework/Actor.h"
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
@@ -33,5 +34,11 @@ public:
 
 	
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+
+	UPROPERTY(EditAnywhere)
+	float ProjectileRadius = 10.f;
+
+	UPROPERTY(EditAnywhere)
+	float OverrideGravityZ = 0.f;
 		
 };
