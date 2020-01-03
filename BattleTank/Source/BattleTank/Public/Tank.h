@@ -16,6 +16,9 @@ public:
 	
 	void AimAt(FVector HitLocation);
 
+	UPROPERTY(EditAnywhere, Category = Firing)
+		float LaunchSpeed = 10000.f; // TODO find something reasonable
+
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
