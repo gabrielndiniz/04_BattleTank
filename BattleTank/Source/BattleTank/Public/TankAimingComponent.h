@@ -35,10 +35,13 @@ public:
 	
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
+	//TODO add SetTurretReference
+
 	UPROPERTY(EditAnywhere)
 	float ProjectileRadius = 10.f;
 
 	UPROPERTY(EditAnywhere)
 	float OverrideGravityZ = 0.f;
 		
+	void MoveBarrelTowards(FVector AimDirection);
 };
