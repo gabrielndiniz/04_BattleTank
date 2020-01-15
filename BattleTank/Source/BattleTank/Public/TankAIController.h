@@ -4,14 +4,13 @@
 
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
-#include "Public/Tank.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-/**
- * 
- */
+//Forward declaration
+class ATank;
+
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
 {

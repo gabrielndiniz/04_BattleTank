@@ -5,13 +5,13 @@
 #include "Blueprint/UserWidget.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/World.h"
-#include "Public/Tank.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "Kismet/GameplayStatics.h"
 #include "TankPlayerController.generated.h" //must be the last include
 
-
+//Forward Declaration
+class ATank;
 
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
