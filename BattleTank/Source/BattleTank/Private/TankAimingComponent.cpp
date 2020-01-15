@@ -36,8 +36,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	FVector OutLaunchVelocity(0);
 	FVector StartLocation = Barrel->GetSocketLocation(FName ("Projectile"));
-	auto Time = GetWorld()->GetTimeSeconds();
-
+	
 	
 	if (!Barrel) { return; };
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(
@@ -56,14 +55,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	{
 		FString TankName = GetOwner()->GetName();
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("%f: aim found"), Time);
 		MoveBarrelTowards(AimDirection);
 		RotateTurret(AimDirection);
 	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("%f: no aim solve found"), Time);
-
-	}
+	
+		// Else No Aim solution found
+	
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)

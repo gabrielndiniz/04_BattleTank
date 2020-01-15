@@ -56,3 +56,14 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 	TankAimingComponent->SetTurretReference(TurretToSet);
 
 }
+
+void ATank::Fire()
+{
+	auto InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
+	if (InputComponent) {
+		UE_LOG(LogTemp, Warning, TEXT("%s fires."), *GetOwner()->GetName());
+	}
+
+	
+
+}
