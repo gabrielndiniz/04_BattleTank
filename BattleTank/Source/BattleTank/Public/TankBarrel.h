@@ -2,6 +2,9 @@
 
 #pragma once
 
+#include "UObject/ConstructorHelpers.h"
+#include "Math/UnrealMathUtility.h"
+#include "Components/SceneComponent.h"
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
 #include "TankBarrel.generated.h"
@@ -17,11 +20,13 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxDegreesPerSecond = 20; //sensible default
+		float MaxDegreesPerSecond = 5.f; //sensible default
 
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxElevationDegrees = 40; //sensible default
+		float MaxElevationDegrees = 40.f; //sensible default
 
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MinElevationDegrees = 0; //sensible default
+		float MinElevationDegrees = 0.f; //sensible default
+
+
 };
