@@ -9,6 +9,7 @@
 
  //Forward Declaration
 class UTankBarrel;
+class UTankTurret;
 class UTankAimingComponent;
 
 UCLASS()
@@ -21,7 +22,7 @@ public:
 	void AimAt(FVector HitLocation);
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-		float LaunchSpeed = 10000.f; // TODO find something reasonable
+		float LaunchSpeed = 4000.f; 
 
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
@@ -39,4 +40,7 @@ private:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurret* TurretToSet);
 };

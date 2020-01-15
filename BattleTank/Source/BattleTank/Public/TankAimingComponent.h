@@ -10,6 +10,7 @@
 
 //Forward Declaration
 class UTankBarrel; 
+class UTankTurret;
 
 //Holds barrel's properties and elevated method
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -28,6 +29,7 @@ protected:
 
 private:
 	UTankBarrel* Barrel = nullptr;
+	UTankTurret* Turret = nullptr;
 
 public:	
 	// Called every frame
@@ -38,6 +40,8 @@ public:
 	
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
+	void SetTurretReference(UTankTurret* TurretToSet);
+
 	//TODO add SetTurretReference
 
 	UPROPERTY(EditAnywhere)
@@ -47,4 +51,7 @@ public:
 	float OverrideGravityZ = 0.f;
 		
 	void MoveBarrelTowards(FVector AimDirection);
+
+	void RotateTurret(FVector AimDirection);
+
 };
