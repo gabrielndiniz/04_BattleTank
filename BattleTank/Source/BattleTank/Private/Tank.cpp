@@ -4,6 +4,7 @@
 #include "Public/Tank.h"
 #include "Public/Projectile.h"
 #include "TankBarrel.h"
+#include "Projectile.h"
 #include "TankPlayerController.h"
 
 
@@ -62,17 +63,16 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 
 void ATank::Fire()
 {
-	auto InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
-	if (InputComponent) {
-		UE_LOG(LogTemp, Warning, TEXT("%s fires."), *GetOwner()->GetName());
-	}
+	
 
 	if (!Barrel) { return; }
 
 	//Spawn the projectile at the end of the barrel
-	GetWorld()->SpawnActor<AProjectile>(
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 		ProjectileBlueprint,
 		Barrel->GetSocketLocation(FName("Projectile")),
 		Barrel->GetSocketRotation(FName("Projectile"))
 		);
+
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
