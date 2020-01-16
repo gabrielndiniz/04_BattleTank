@@ -27,6 +27,14 @@ public:
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 4000.f; 
 
+	UFUNCTION(Blueprintcallable)
+		void Fire();
+
+	UPROPERTY(EditAnywhere, Category = Firing)
+		float ReloadTimeInSeconds = 3.f;
+
+
+
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
@@ -47,13 +55,15 @@ private:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
 
-	UFUNCTION(Blueprintcallable)
-	void Fire();
+
 
 	UPROPERTY(EditAnywhere, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint; 
 
 	//Local Barrel reference for spawning projectile
 	UTankBarrel* Barrel = nullptr;
+
+
+	double LastFireTime = 0;
 
 };

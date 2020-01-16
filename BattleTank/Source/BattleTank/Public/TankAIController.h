@@ -26,8 +26,8 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	ATank* GetControlledAITank() const;
 
-	ATank* GetPlayerTank();
+
+	
 
 };
