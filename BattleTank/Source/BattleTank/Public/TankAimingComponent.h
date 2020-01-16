@@ -44,10 +44,10 @@ public:
 
 	//TODO add SetTurretReference
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float ProjectileRadius = 10.f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float OverrideGravityZ = 0.f;
 		
 	void MoveBarrelTowards(FVector AimDirection);
