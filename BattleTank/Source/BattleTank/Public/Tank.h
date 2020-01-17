@@ -12,6 +12,7 @@
  //Forward Declaration
 class UTankBarrel;
 class UTankTurret;
+class UTankTrack;
 class UTankAimingComponent;
 class AProjectile;
 
@@ -55,7 +56,8 @@ private:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
 
-
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTrackReference(UTankTrack* TrackToSet);
 
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint; 
