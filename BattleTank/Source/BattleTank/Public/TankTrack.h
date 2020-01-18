@@ -7,7 +7,7 @@
 #include "TankTrack.generated.h"
 
 
-/*TankTrack us ysed ti set naxunyn driving force and apply to move the tank
+/*TankTrack is used to set maximum driving force and apply to move the tank
 */
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent), hidecategories = ("Collision"))
 class BATTLETANK_API UTankTrack : public UStaticMeshComponent
@@ -19,6 +19,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void SetThrottle(float Throttle);
 	
-
-	//TODO clamp actual throttle value so player can't over-dride
+	//Max force per track, in Newtons 
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+		float TrackMaxDrivingForce = 400000;
+		//Suppose 10m/s2 and 40 ton of Tank, by game dev. I would preffer different.   
 };
