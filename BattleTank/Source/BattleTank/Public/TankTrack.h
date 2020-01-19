@@ -21,6 +21,7 @@ public:
 	
 	//Max force per track, in Newtons 
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
-		float TrackMaxDrivingForce = 400000;
-		//Suppose 10m/s2 and 40 ton of Tank, by game dev. I would preffer different.   
+		float TrackMaxDrivingForce = 30000000.f;
+		//This value is sensibility analysis. Before that, suppose 10m/s2 and 40 ton of Tank, by game dev. I would preffer different.   
+		// ALSO I changed the value of Linear and Angular Damp to 1.0
 };
